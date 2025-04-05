@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yoga Therapy</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/yoga.css" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <header class="text-center mb-4">
+        <h1 class="display-4">Yoga Therapy</h1>
+        <p class="lead">
+          Explore a variety of yoga sessions designed to bring relaxation and
+          well-being to your life.
+        </p>
+      </header>
+
+      <!-- Yoga Video Carousel -->
+      <div id="yogaCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <!-- Slide 1 -->
+          <div class="carousel-item active">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card">
+                  <iframe
+                    class="card-img-top"
+                    src="https://www.youtube.com/embed/v7AYKMP6rOE"
+                    title="Yoga for Beginners"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="card-body">
+                    <h5 class="card-title">Yoga for Beginners</h5>
+                    <p class="card-text">
+                      An introduction to yoga, perfect for beginners.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <iframe
+                    class="card-img-top"
+                    src="https://www.youtube.com/embed/oBu-pQG6sTY"
+                    title="Morning Yoga Flow"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="card-body">
+                    <h5 class="card-title">Morning Yoga Flow</h5>
+                    <p class="card-text">
+                      A gentle flow to start your day energized and focused.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <iframe
+                    class="card-img-top"
+                    src="https://www.youtube.com/embed/X3-gKPNyrTA"
+                    title="Yoga for Stress Relief"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="card-body">
+                    <h5 class="card-title">Yoga for Stress Relief</h5>
+                    <p class="card-text">
+                      Relax and reduce stress with this calming routine.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card">
+                  <iframe
+                    class="card-img-top"
+                    src="https://www.youtube.com/embed/_l3ySVKYVJ8"
+                    title="Yoga for Back Pain"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="card-body">
+                    <h5 class="card-title">Yoga for Back Pain</h5>
+                    <p class="card-text">
+                      Ease tension in your back with this focused session.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <iframe
+                    class="card-img-top"
+                    src="https://www.youtube.com/embed/6kJgTouHHeE"
+                    title="10-Minute Desk Yoga"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="card-body">
+                    <h5 class="card-title">10-Minute Desk Yoga</h5>
+                    <p class="card-text">
+                      Stretch and refresh with quick yoga at your desk.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <iframe
+                    class="card-img-top"
+                    src="https://www.youtube.com/embed/hJbRpHZr_d0"
+                    title="Yoga for Anxiety"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="card-body">
+                    <h5 class="card-title">Yoga for Anxiety</h5>
+                    <p class="card-text">
+                      Calm your mind with this anxiety-relief routine.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <div class="d-flex justify-content-between mt-3">
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-target="#yogaCarousel"
+            data-bs-slide="prev"
+          >
+            Previous
+          </button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-target="#yogaCarousel"
+            data-bs-slide="next"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+
+      <!-- Image Card Section -->
+      <div class="row mt-5">
+        <div class="col-md-4">
+          <div class="card">
+            <img src="yoga img/yoga1.png" class="card-img-top" alt="Image 1" />
+            <div class="card-body">
+              <h5 class="card-title">Sofia Russo</h5>
+              <p class="card-text">
+                Specialization: Hatha and Vinyasa yoga. Focus: Personalized
+                programs for stress relief and flexibility.
+              </p>
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#bookMentorModal1"
+              >
+                Book Mentor
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="yoga img/yoga3.png" class="card-img-top" alt="Image 2" />
+            <div class="card-body">
+              <h5 class="card-title">Maya Tanaka</h5>
+              <p class="card-text">
+                Specialization: Yoga and Ayurveda. Focus: Holistic well-being
+                and balance.
+              </p>
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#bookMentorModal2"
+              >
+                Book Mentor
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="yoga img/images.jpeg" class="card-img-top" alt="Image 3" />
+            <div class="card-body">
+              <h5 class="card-title">Anya Ivanova</h5>
+              <p class="card-text">
+                Specialization: Ashtanga yoga. Focus: Strength-building and
+                alignment.
+              </p>
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#bookMentorModal3"
+              >
+                Book Mentor
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal for Booking Mentor 1 -->
+      <div
+        class="modal fade"
+        id="bookMentorModal1"
+        tabindex="-1"
+        aria-labelledby="bookMentorModalLabel1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="bookMentorModalLabel1">
+                Book a Yoga Mentor for Retreat
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="name1" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name1" required />
+                </div>
+                <div class="mb-3">
+                  <label for="email1" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email1"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="message1" class="form-label">Message</label>
+                  <textarea
+                    class="form-control"
+                    id="message1"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal for Booking Mentor 2 -->
+      <div
+        class="modal fade"
+        id="bookMentorModal2"
+        tabindex="-1"
+        aria-labelledby="bookMentorModalLabel2"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="bookMentorModalLabel2">
+                Book a Yoga Mentor for Workshops
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="name2" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name2" required />
+                </div>
+                <div class="mb-3">
+                  <label for="email2" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email2"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="message2" class="form-label">Message</label>
+                  <textarea
+                    class="form-control"
+                    id="message2"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal for Booking Mentor 3 -->
+      <div
+        class="modal fade"
+        id="bookMentorModal3"
+        tabindex="-1"
+        aria-labelledby="bookMentorModalLabel3"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="bookMentorModalLabel3">
+                Book a Yoga Mentor for Private Sessions
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="name3" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name3" required />
+                </div>
+                <div class="mb-3">
+                  <label for="email3" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email3"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="message3" class="form-label">Message</label>
+                  <textarea
+                    class="form-control"
+                    id="message3"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflex Dashboard</title>
+    
+    <link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+<body>
+    <div class="sidebar">
+        <h2>🧠 Reflex Dashboard</h2>
+        <ul>
+            <li><a href="#" id="nav-home">🏠 Home</a></li>
+            <li><a href="#" id="nav-appointments">📅 Appointments</a></li>
+            <li><a href="#" id="nav-users">👥 Users</a></li>
+            <li><a href="#" id="nav-settings">⚙️ Settings</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Welcome, Admin!</h1>
+            <p>Monitor and manage your appointments and user data efficiently.</p>
+        </header>
+
+        <section id="home-section" class="content-section active">
+            <h2>👋 Welcome to Reflex Dashboard</h2>
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>Total Appointments</h3>
+                    <p>50</p>
+                </div>
+                <div class="card">
+                    <h3>Total Users</h3>
+                    <p>10</p>
+                </div>
+                <div class="card">
+                    <h3>Pending Appointments</h3>
+                    <p>5</p>
+                </div>
+            </div>
+        </section>
+ 
+
+        <section id="appointments-section" class="content-section">
+            <h2>📅 Appointments</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Patient Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="appointments-body">
+                <!-- Appointment data will be inserted dynamically here -->
+              </tbody>
+            </table>
+          </section>
+          
+        
+
+        <!-- Users Section -->
+        <section id="users-section" class="content-section">
+            <h2>👥 New User Registrations</h2>
+            <table id="users-table">
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Registration Date</th>
+                  </tr>
+                </thead>
+                <tbody id="users-table-body">
+                  <!-- Data will be injected here -->
+                </tbody>
+              </table>
+              
+        </section>
+    </div>
+
+    <section id="settings-section" class="content-section">
+        <h2>⚙️ Settings</h2>
+        <p>Settings section coming soon!</p>
+    </section>
+
+    <script src="js/dashboard.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          fetch('http://localhost:3000/users')
+            .then(res => res.json())
+            .then(data => {
+              console.log('Fetched users:', data);
+      
+              const tbody = document.getElementById('users-table-body');
+              tbody.innerHTML = '';
+      
+              data.forEach((user, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td>${index + 1}</td>
+                  <td>${user.name}</td>
+                  <td>${user.email}</td>
+                  <td>${new Date(user.createdAt || Date.now()).toLocaleString()}</td>
+                `;
+                tbody.appendChild(tr);
+              });
+            })
+            .catch(error => console.error('Fetch error:', error));
+        });
+
+
+
+
+
+
+
+
+
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch('http://localhost:3000/dashboard-stats')
+              .then(res => res.json())
+              .then(data => {
+                document.querySelector('.card:nth-child(1) p').textContent = data.totalAppointments;
+                document.querySelector('.card:nth-child(2) p').textContent = data.totalUsers; // ← updated line
+                document.querySelector('.card:nth-child(3) p').textContent = data.pendingAppointments;
+              })
+              .catch(error => {
+                console.error('Error fetching dashboard stats:', error);
+              });
+          });
+          
+      </script>
+      
+    
+      
+</body>
+</html>

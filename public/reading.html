@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading Therapy</title>
+    <link rel="stylesheet" href="css/reading.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Reading Therapy</h1>
+      <p>Motivational quotes & books help change our mindset.</p>
+    </header>
+    <main>
+      <section class="quote-section">
+        <h2>Motivational Quotes</h2>
+        <div class="slider">
+          <div class="slide active">
+            <blockquote>
+              <p>
+                "The only way to do great work is to love what you do." - Steve
+                Jobs
+              </p>
+            </blockquote>
+          </div>
+          <div class="slide">
+            <blockquote>
+              <p>
+                "Success is not the key to happiness. Happiness is the key to
+                success." - Albert Schweitzer
+              </p>
+            </blockquote>
+          </div>
+          <div class="slide">
+            <blockquote>
+              <p>
+                "Your time is limited, don't waste it living someone else's
+                life." - Steve Jobs
+              </p>
+            </blockquote>
+          </div>
+          <div class="slide">
+            <blockquote>
+              <p>
+                "What lies behind us and what lies before us are tiny matters
+                compared to what lies within us." - Ralph Waldo Emerson
+              </p>
+            </blockquote>
+          </div>
+          <button class="prev" onclick="changeSlide(-1)">❮</button>
+          <button class="next" onclick="changeSlide(1)">❯</button>
+        </div>
+      </section>
+      <section class="book-section">
+        <h2>Recommended Books</h2>
+        <div class="book-cards">
+          <div
+            class="book-card"
+            onclick="window.location.href='https://pdfdrive.com.co/the-power-of-now-pdf-a/'"
+          >
+            <img src="reading img/the power.jpeg" alt="The Power of Now" />
+            <h3>The Power of Now</h3>
+          </div>
+          <div
+            class="book-card"
+            onclick="window.location.href='https://pdfdrive.com.co/atomic-habits-pdf/'"
+          >
+            <img src="reading img/Atomic Habits.jpg" alt="Atomic Habits" />
+            <h3>Atomic Habits</h3>
+          </div>
+
+          <div
+            class="book-card"
+            onclick="window.location.href='https://cloudfront.escholarship.org/dist/prd/content/qt2wr8q1sw/qt2wr8q1sw.pdf'"
+          >
+            <img src="reading img/mind set.jpg" alt="Mindset" />
+            <h3>Mindset</h3>
+          </div>
+          <div
+            class="book-card"
+            onclick="window.location.href='https://pdfdrive.com.co/start-with-why-pdf/'"
+          >
+            <img src="reading img/start with.jpeg" alt="Start with Why" />
+            <h3>Start with Why</h3>
+          </div>
+          <div
+            class="book-card"
+            onclick="window.location.href='https://pdfdrive.com.co/you-are-a-badass-pdf-a/'"
+          >
+            <img src="reading img/baddas.jpg" alt="You Are a Badass" />
+            <h3>You Are a Badass</h3>
+          </div>
+          <div
+            class="book-card"
+            onclick="window.location.href='https://pdfdrive.com.co/7-habits-of-highly-effective-people-pdf/'"
+          >
+            <img
+              src="reading img/7-Habits-of-Highly-Effective-People.webp"
+              alt="The 7 Habits of Highly Effective People"
+            />
+            <h3>The 7 Habits of Highly Effective People</h3>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="js/reading.js"></script>
+  </body>
+</html>

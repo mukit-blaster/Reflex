@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book a Doctor Appointment</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/booking.css" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <header class="text-center mb-4">
+        <h1 class="display-4">Book a Psychiatrist Appointment</h1>
+        <p class="lead">
+          Choose a Psychiatrist and fill in your details to book an appointment.
+        </p>
+      </header>
+
+      <!-- Doctor Carousel -->
+      <div id="doctorCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <!-- Slide 1 -->
+          <div class="carousel-item active">
+            <div class="row justify-content-center">
+              <!-- Doctor Card 1 -->
+
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img
+                    src="booking img/team4.avif"
+                    class="card-img-top"
+                    alt="Dr. Alex Brown"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Dr. Alex Brown</h5>
+                    <p class="card-text">
+                      Specialization in mental health for children and teenagers
+                      with 5+ years of experience.
+                    </p>
+                    <button
+                      class="btn btn-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#appointmentModal"
+                    >
+                      Book Appointment
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Doctor Card 2 -->
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img
+                    src="booking img/team5.jpg"
+                    class="card-img-top"
+                    alt="Dr. Sarah Wilson"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Dr. Sarah Wilson</h5>
+                    <p class="card-text">
+                      Specialization in elderly mental health issues, including
+                      dementia, with 7+ years of experience.
+                    </p>
+                    <button
+                      class="btn btn-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#appointmentModal"
+                    >
+                      Book Appointment
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Doctor Card 3 -->
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img
+                    src="booking img/team6.png"
+                    class="card-img-top"
+                    alt="Dr. Michael Johnson"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Dr. Michael Johnson</h5>
+                    <p class="card-text">
+                      Specialization in legal psychiatric evaluations with 6+
+                      years of experience.
+                    </p>
+                    <button
+                      class="btn btn-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#appointmentModal"
+                    >
+                      Book Appointment
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-item">
+            <div class="row justify-content-center">
+              <!-- Doctor Card 4 -->
+
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img
+                    src="booking img/team1.jpg"
+                    class="card-img-top"
+                    alt="Dr. Smith"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Dr. John Smith</h5>
+                    <p class="card-text">
+                      Specialization in substance use disorders treatment with
+                      8+ years of experience.
+                    </p>
+                    <button
+                      class="btn btn-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#appointmentModal"
+                    >
+                      Book Appointment
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Doctor Card 5 -->
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img
+                    src="booking img/team2.jpg"
+                    class="card-img-top"
+                    alt="Dr. Jane Doe"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Dr. Jane Doe</h5>
+                    <p class="card-text">
+                      Specialization in managing psychiatric symptoms in medical
+                      settings with 4+ years of experience.
+                    </p>
+                    <button
+                      class="btn btn-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#appointmentModal"
+                    >
+                      Book Appointment
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Doctor Card 6 -->
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img
+                    src="booking img/team3.jpg"
+                    class="card-img-top"
+                    alt="Dr. Emily Davis"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Dr. Emily Davis</h5>
+                    <p class="card-text">
+                      Specialization in acute mental health crisis intervention
+                      with 3+ years of experience.
+                    </p>
+                    <button
+                      class="btn btn-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#appointmentModal"
+                    >
+                      Book Appointment
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <div class="d-flex justify-content-between mt-3">
+          <button
+            class="btn btn-outline-success"
+            type="button"
+            data-bs-target="#doctorCarousel"
+            data-bs-slide="prev"
+          >
+            Previous
+          </button>
+          <button
+            class="btn btn-outline-success"
+            type="button"
+            data-bs-target="#doctorCarousel"
+            data-bs-slide="next"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+
+      <!-- Appointment Modal -->
+      <div
+        class="modal fade"
+        id="appointmentModal"
+        tabindex="-1"
+        aria-labelledby="appointmentModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="appointmentModalLabel">
+                Book an Appointment
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="appointmentForm">
+                <div class="mb-3">
+                  <label for="patientName" class="form-label">Your Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="patientName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="patientEmail" class="form-label"
+                    >Email Address</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="patientEmail"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="patientPhone" class="form-label"
+                    >Phone Number</label
+                  >
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="patientPhone"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="appointmentDate" class="form-label"
+                    >Preferred Date</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="appointmentDate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="appointmentTime" class="form-label"
+                    >Preferred Time</label
+                  >
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="appointmentTime"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Submit Appointment
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  
+    <script>
+      document.getElementById("appointmentForm").addEventListener("submit", async function (e) {
+        e.preventDefault(); // prevent page reload
+    
+        const name = document.getElementById("patientName").value;
+        const email = document.getElementById("patientEmail").value;
+        const phone = document.getElementById("patientPhone").value;
+        const date = document.getElementById("appointmentDate").value;
+        const time = document.getElementById("appointmentTime").value;
+    
+        const appointmentData = { name, email, phone, date, time };
+    
+        try {
+          const response = await fetch("/appointment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(appointmentData),
+          });
+    
+          const result = await response.json();
+    
+          if (response.ok) {
+            alert("Appointment submitted successfully!");
+            document.getElementById("appointmentForm").reset();
+            const modal = bootstrap.Modal.getInstance(document.getElementById("appointmentModal"));
+            modal.hide();
+          } else {
+            alert("Failed to submit appointment: " + result.message);
+          }
+        } catch (err) {
+          alert("Error submitting appointment.");
+          console.error(err);
+        }
+      });
+    </script>
+    
+  
+  
+  </body>
+</html>
