@@ -327,7 +327,7 @@ function showSection(sectionId) {
 }
 
 function loadAppointments() {
-  fetch('http://localhost:3000/appointments')
+  fetch('http://localhost:8080/appointments')
       .then(res => res.json())
       .then(data => {
           const tbody = document.getElementById('appointments-body');
@@ -368,7 +368,7 @@ function attachEditListeners() {
           const time = prompt('Edit Time:', row.children[5].textContent);
 
           if (name && email && phone && date && time) {
-              fetch(`http://localhost:3000/appointments/${id}`, {
+              fetch(`http://localhost:8080/appointments/${id}`, {
                   method: 'PUT',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ name, email, phone, date, time })
@@ -395,7 +395,7 @@ function attachStatusListeners() {
 }
 
 function updateStatus(id, status) {
-  fetch(`http://localhost:3000/appointments/${id}/status`, {
+  fetch(`http://localhost:8080/appointments/${id}/status`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status })
