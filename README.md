@@ -1,111 +1,138 @@
-# Reflex — Your Mental Wellness Companion
+# Reflex — Mental Wellness Companion
 
-Reflex is a full-stack mental wellness platform: a public-facing site for booking
-appointments with psychiatrists plus an admin dashboard for managing users and
-appointments.
+Reflex is a full-stack mental wellness platform that connects users with psychiatric and therapeutic services. It provides a public-facing site for browsing services and booking appointments, alongside a secure admin dashboard for managing users and appointments.
 
-## Stack
+## Tech Stack
 
-- **Frontend:** static HTML / CSS / vanilla JS (in `public/`)
-- **Backend:** Node + Express (`lib/app.js`)
-- **Database:** MongoDB (via Mongoose)
-- **Auth:** JWT (with a built-in admin login from env vars)
-- **Hosting:** Vercel — `api/index.js` is the serverless entrypoint
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Static HTML, CSS, Vanilla JavaScript |
+| Backend | Node.js, Express 5 |
+| Database | MongoDB via Mongoose |
+| Auth | JSON Web Tokens (JWT) |
 
-## Services offered
+## Features
 
-- Yoga therapy
-- Laughing therapy
-- Talking therapy
-- Reading therapy
-- Audio therapy
-- Psychiatrist consultations
+- User registration and authentication
+- Appointment booking for multiple therapy types
+- Admin dashboard with user and appointment management
+- Appointment status workflow (pending → approved / rejected)
+- Role-based access control (public, user, admin)
 
-## Project layout
+## Services
+
+- Yoga Therapy
+- Laughing Therapy
+- Talking Therapy
+- Reading Therapy
+- Audio Therapy
+- Psychiatrist Consultations
+
+## Project Structure
 
 ```
 .
-├── api/index.js          # Vercel serverless entrypoint (re-exports lib/app.js)
+├── api/
+│   └── index.js          # Serverless entrypoint (re-exports lib/app.js)
 ├── lib/
-│   ├── app.js            # Express app, all /api/* routes
-│   └── mongo.js          # Cached Mongoose connection
+│   ├── app.js            # Express app and all /api/* routes
+│   └── mongo.js          # Cached Mongoose connection helper
 ├── models/
 │   ├── Appointment.js
 │   └── User.js
-├── public/               # Static frontend (index.html, booking.html, dashboard.html, ...)
-├── server.js             # Local dev launcher (not used by Vercel)
+├── public/               # Static frontend
+│   ├── index.html
+│   ├── booking.html
+│   ├── dashboard.html
+│   ├── login.html
+│   ├── signup.html
+│   ├── yoga.html
+│   └── reading.html
+├── server.js             # Local development server launcher
 ├── vercel.json
 ├── .env.example
 └── package.json
 ```
 
-## Local development
+## Getting Started
 
-1. Install dependencies:
+### Prerequisites
+
+- Node.js >= 18
+- A running MongoDB instance or [MongoDB Atlas](https://www.mongodb.com/atlas) connection string
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mukit-blaster/Reflex.git
+   cd Reflex
+   ```
+
+2. Install dependencies:
    ```bash
    npm install
    ```
-2. Copy `.env.example` to `.env` and fill in the values:
+
+3. Configure environment variables:
    ```bash
    cp .env.example .env
    ```
-3. Start the server:
+   Then open `.env` and fill in the required values (see [Environment Variables](#environment-variables)).
+
+4. Start the development server:
    ```bash
    npm run dev
    ```
-4. Open <http://localhost:8080>.
 
-The admin dashboard is at <http://localhost:8080/dashboard.html>. Log in via
-`/login.html` with the `ADMIN_USER` / `ADMIN_PASS` you set in `.env` (defaults
-are `admin` / `admin` for local dev only).
+5. Open [http://localhost:8080](http://localhost:8080) in your browser.
 
-## Deploying to Vercel
+The admin dashboard is available at [http://localhost:8080/dashboard.html](http://localhost:8080/dashboard.html). Log in at `/login.html` using the `ADMIN_USER` and `ADMIN_PASS` values you configured in `.env`.
 
-1. Push this repository to GitHub.
-2. In Vercel, click **Add New → Project** and import the repo. No build command
-   or output directory is needed — Vercel detects `api/index.js` as a
-   serverless function and serves `public/` as static assets.
-3. Under **Settings → Environment Variables**, add:
-   - `MONGODB_URI` — your MongoDB Atlas connection string
-   - `JWT_SECRET` — a long random string (e.g. `openssl rand -hex 32`)
-   - `ADMIN_USER` — the admin username
-   - `ADMIN_PASS` — the admin password
-4. Click **Deploy**. Subsequent pushes auto-deploy.
+## Environment Variables
 
-You can also deploy from the CLI:
-```bash
-npm i -g vercel
-vercel        # preview deploy
-vercel --prod # production deploy
-```
+| Variable | Description | Default (dev only) |
+|----------|-------------|-------------------|
+| `MONGODB_URI` | MongoDB connection string | — |
+| `JWT_SECRET` | Secret key for signing JWTs (use a long random string) | — |
+| `ADMIN_USER` | Admin account username | `admin` |
+| `ADMIN_PASS` | Admin account password | `admin` |
+| `PORT` | Port the server listens on | `8080` |
 
-## API surface
+> **Warning:** The default `admin`/`admin` credentials are for local development only. Always set strong values in any non-local environment.
 
-All routes are under `/api`.
+## API Reference
 
-| Method | Path                              | Auth        | Purpose                       |
-| ------ | --------------------------------- | ----------- | ----------------------------- |
-| POST   | `/api/signup`                     | public      | Register a new user           |
-| POST   | `/api/login`                      | public      | Log in (returns JWT)          |
-| GET    | `/api/me`                         | bearer      | Current token info            |
-| POST   | `/api/appointment`                | public      | Submit a booking              |
-| GET    | `/api/appointments?q=&status=`    | admin       | List / search appointments    |
-| PUT    | `/api/appointments/:id`           | admin       | Edit an appointment           |
-| PUT    | `/api/appointments/:id/status`    | admin       | Approve / reject              |
-| DELETE | `/api/appointments/:id`           | admin       | Remove an appointment         |
-| GET    | `/api/users`                      | admin       | List registered users         |
-| DELETE | `/api/users/:id`                  | admin       | Remove a user                 |
-| GET    | `/api/dashboard-stats`            | admin       | Counts for the home cards     |
-| GET    | `/api/health`                     | public      | Liveness check                |
+All endpoints are prefixed with `/api`.
 
-Admin endpoints expect `Authorization: Bearer <token>`. The token is issued by
-`/api/login` when the credentials match `ADMIN_USER` / `ADMIN_PASS`, or when a
-DB user has `role: "admin"`.
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| `POST` | `/api/signup` | Public | Register a new user |
+| `POST` | `/api/login` | Public | Authenticate and receive a JWT |
+| `GET` | `/api/me` | Bearer token | Retrieve current token info |
+| `POST` | `/api/appointment` | Public | Submit a booking request |
+| `GET` | `/api/appointments?q=&status=` | Admin | List and search appointments |
+| `PUT` | `/api/appointments/:id` | Admin | Update appointment details |
+| `PUT` | `/api/appointments/:id/status` | Admin | Approve or reject an appointment |
+| `DELETE` | `/api/appointments/:id` | Admin | Delete an appointment |
+| `GET` | `/api/users` | Admin | List all registered users |
+| `DELETE` | `/api/users/:id` | Admin | Delete a user |
+| `GET` | `/api/dashboard-stats` | Admin | Retrieve dashboard summary counts |
+| `GET` | `/api/health` | Public | Server liveness check |
 
-## Promoting a database user to admin
+Admin endpoints require an `Authorization: Bearer <token>` header. A token with admin privileges is issued by `/api/login` when credentials match `ADMIN_USER`/`ADMIN_PASS`, or when the authenticated DB user has `role: "admin"`.
 
-The built-in admin (`ADMIN_USER`/`ADMIN_PASS`) is the simplest path. To grant
-admin to an existing DB user, update their document directly in MongoDB:
+## Granting Admin Access to a Database User
+
+To elevate an existing database user to admin, run the following directly in MongoDB:
+
 ```js
-db.users.updateOne({ email: "you@example.com" }, { $set: { role: "admin" } })
+db.users.updateOne(
+  { email: "user@example.com" },
+  { $set: { role: "admin" } }
+)
 ```
+
+## License
+
+This project is licensed under the terms of the [LICENSE](LICENSE) file.
