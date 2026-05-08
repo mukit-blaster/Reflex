@@ -310,7 +310,7 @@
         const appointmentData = { name, email, phone, date, time };
     
         try {
-          const response = await fetch("/appointment", {
+          const response = await fetch("/api/appointment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

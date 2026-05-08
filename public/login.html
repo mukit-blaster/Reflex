@@ -57,25 +57,31 @@
         const name = document.getElementById('name').value;
         const password = document.getElementById('password').value;
 
-        const response = await fetch('http://localhost:8080/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name, password }),
-        });
+        try {
+          const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, password }),
+          });
 
-        const data = await response.json();
+          const data = await response.json();
 
-        if (response.ok) {
-          // Store JWT token and user data in localStorage
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('username', data.user.name);
-          localStorage.setItem('isLoggedIn', 'true');
-          alert('Login successful!');
-          window.location.href = 'index.html';  // Redirect to the main page
-        } else {
-          alert(data.message || 'Invalid username or password');
+          if (response.ok) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('username', data.user.name);
+            localStorage.setItem('role', data.user.role || 'user');
+            localStorage.setItem('isLoggedIn', 'true');
+            if (data.user.role === 'admin') {
+              window.location.href = 'dashboard.html';
+            } else {
+              window.location.href = 'index.html';
+            }
+          } else {
+            alert(data.message || 'Invalid username or password');
+          }
+        } catch (err) {
+          console.error(err);
+          alert('Network error during login.');
         }
       });
     </script>

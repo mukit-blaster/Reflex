@@ -62,24 +62,28 @@
     <script>
       document.getElementById('signup-form').addEventListener('submit', async function (e) {
         e.preventDefault();
-    
+
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-    
-        const response = await fetch('http://localhost:8080/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name, email, password }),
-        });
-    
-        if (response.ok) {
-          alert('Account created successfully!');
-          window.location.href = 'login.html';  // Redirect to login page
-        } else {
-          alert('Error creating account');
+
+        try {
+          const response = await fetch('/api/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password }),
+          });
+          const data = await response.json().catch(() => ({}));
+
+          if (response.ok) {
+            alert('Account created successfully!');
+            window.location.href = 'login.html';
+          } else {
+            alert(data.message || 'Error creating account');
+          }
+        } catch (err) {
+          console.error(err);
+          alert('Network error creating account.');
         }
       });
     </script>

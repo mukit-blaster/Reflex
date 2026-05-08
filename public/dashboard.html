@@ -3,144 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reflex Dashboard</title>
-    
+    <title>Reflex Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
-
 </head>
 <body>
-    <div class="sidebar">
-        <h2>🧠 Reflex Dashboard</h2>
-        <ul>
-            <li><a href="#" id="nav-home">🏠 Home</a></li>
-            <li><a href="#" id="nav-appointments">📅 Appointments</a></li>
-            <li><a href="#" id="nav-users">👥 Users</a></li>
-            <li><a href="#" id="nav-settings">⚙️ Settings</a></li>
-        </ul>
-    </div>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-mark"><i class="fa-solid fa-brain"></i></span>
+            <span class="brand-text">Reflex<small>Admin</small></span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" id="nav-home" class="nav-link active">
+                <i class="fa-solid fa-house"></i><span>Overview</span>
+            </a>
+            <a href="#" id="nav-appointments" class="nav-link">
+                <i class="fa-solid fa-calendar-check"></i><span>Appointments</span>
+            </a>
+            <a href="#" id="nav-users" class="nav-link">
+                <i class="fa-solid fa-users"></i><span>Users</span>
+            </a>
+            <a href="#" id="nav-settings" class="nav-link">
+                <i class="fa-solid fa-gear"></i><span>Settings</span>
+            </a>
+            <a href="index.html" class="nav-link">
+                <i class="fa-solid fa-globe"></i><span>View Site</span>
+            </a>
+            <a href="#" id="nav-logout" class="nav-link nav-logout">
+                <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+            </a>
+        </nav>
+    </aside>
 
-    <div class="main-content">
-        <header>
-            <h1>Welcome, Admin!</h1>
-            <p>Monitor and manage your appointments and user data efficiently.</p>
+    <main class="main-content">
+        <header class="main-header">
+            <div>
+                <h1>Welcome back, <span id="admin-name">Admin</span></h1>
+                <p class="muted">Monitor and manage your appointments and user data.</p>
+            </div>
+            <div class="header-pill">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Admin</span>
+            </div>
         </header>
 
         <section id="home-section" class="content-section active">
-            <h2>👋 Welcome to Reflex Dashboard</h2>
             <div class="summary-cards">
-                <div class="card">
-                    <h3>Total Appointments</h3>
-                    <p>50</p>
+                <div class="card card-blue">
+                    <div class="card-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                    <div class="card-body">
+                        <p class="card-label">Total Appointments</p>
+                        <p class="card-value" id="stat-total-appts">—</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Total Users</h3>
-                    <p>10</p>
+                <div class="card card-purple">
+                    <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="card-body">
+                        <p class="card-label">Total Users</p>
+                        <p class="card-value" id="stat-total-users">—</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Pending Appointments</h3>
-                    <p>5</p>
+                <div class="card card-orange">
+                    <div class="card-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                    <div class="card-body">
+                        <p class="card-label">Pending</p>
+                        <p class="card-value" id="stat-pending-appts">—</p>
+                    </div>
+                </div>
+                <div class="card card-green">
+                    <div class="card-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    <div class="card-body">
+                        <p class="card-label">Approved</p>
+                        <p class="card-value" id="stat-approved-appts">—</p>
+                    </div>
                 </div>
             </div>
         </section>
- 
 
         <section id="appointments-section" class="content-section">
-            <h2>📅 Appointments</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Patient Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="appointments-body">
-                <!-- Appointment data will be inserted dynamically here -->
-              </tbody>
-            </table>
-          </section>
-          
-        
-
-        <!-- Users Section -->
-        <section id="users-section" class="content-section">
-            <h2>👥 New User Registrations</h2>
-            <table id="users-table">
-                <thead>
-                  <tr>
-                    <th>User ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Registration Date</th>
-                  </tr>
-                </thead>
-                <tbody id="users-table-body">
-                  <!-- Data will be injected here -->
-                </tbody>
-              </table>
-              
+            <div class="section-header">
+                <h2><i class="fa-solid fa-calendar-check"></i> Appointments</h2>
+            </div>
+            <div class="panel">
+                <div class="toolbar">
+                    <div class="search-wrap">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="appt-search" placeholder="Search by name, email, or phone…" />
+                    </div>
+                    <select id="appt-status-filter">
+                        <option value="">All statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                    <button id="appt-refresh" class="btn-primary"><i class="fa-solid fa-rotate"></i> Refresh</button>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Patient</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointments-body"></tbody>
+                    </table>
+                </div>
+            </div>
         </section>
-    </div>
 
-    <section id="settings-section" class="content-section">
-        <h2>⚙️ Settings</h2>
-        <p>Settings section coming soon!</p>
-    </section>
+        <section id="users-section" class="content-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-users"></i> Registered Users</h2>
+            </div>
+            <div class="panel">
+                <div class="table-wrap">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Registered</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="settings-section" class="content-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-gear"></i> Settings</h2>
+            </div>
+            <div class="panel settings-panel">
+                <div class="settings-row">
+                    <span class="settings-label">Admin user</span>
+                    <strong id="settings-admin-name">—</strong>
+                </div>
+                <div class="settings-row">
+                    <span class="settings-label">Server time</span>
+                    <strong id="settings-server-time">checking…</strong>
+                </div>
+                <div class="settings-row">
+                    <span class="settings-label">API health</span>
+                    <strong class="status-pill status-approved">OK</strong>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script src="js/dashboard.js"></script>
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-          fetch('http://localhost:8080/users')
-            .then(res => res.json())
-            .then(data => {
-              console.log('Fetched users:', data);
-      
-              const tbody = document.getElementById('users-table-body');
-              tbody.innerHTML = '';
-      
-              data.forEach((user, index) => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                  <td>${index + 1}</td>
-                  <td>${user.name}</td>
-                  <td>${user.email}</td>
-                  <td>${new Date(user.createdAt || Date.now()).toLocaleString()}</td>
-                `;
-                tbody.appendChild(tr);
-              });
-            })
-            .catch(error => console.error('Fetch error:', error));
-        });
-
-
-
-
-
-
-
-
-
-        window.addEventListener('DOMContentLoaded', () => {
-            fetch('http://localhost:8080/dashboard-stats')
-              .then(res => res.json())
-              .then(data => {
-                document.querySelector('.card:nth-child(1) p').textContent = data.totalAppointments;
-                document.querySelector('.card:nth-child(2) p').textContent = data.totalUsers; // ← updated line
-                document.querySelector('.card:nth-child(3) p').textContent = data.pendingAppointments;
-              })
-              .catch(error => {
-                console.error('Error fetching dashboard stats:', error);
-              });
-          });
-          
-      </script>
-      
-    
-      
 </body>
 </html>

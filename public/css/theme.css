@@ -1,0 +1,237 @@
+/* ==========================================================================
+   Reflex — global dark theme & design tokens
+   Inspired by connectdipta/Reflex (Next.js + Tailwind reference).
+   This file is plain CSS so it can be loaded by every static HTML page
+   without a build step. Load it BEFORE per-page stylesheets so they can
+   override where needed.
+   ========================================================================== */
+
+:root {
+  /* Surface */
+  --bg-900: #0a1020;
+  --bg-800: #0d1528;
+  --bg-700: #111c33;
+  --bg-600: #16243f;
+
+  /* Brand gradient (sky→teal) */
+  --brand-1: #0ea5e9;
+  --brand-2: #14b8a6;
+  --brand-1-rgb: 14, 165, 233;
+  --brand-2-rgb: 20, 184, 166;
+  --grad-brand: linear-gradient(135deg, #0ea5e9 0%, #14b8a6 100%);
+  --grad-brand-r: linear-gradient(135deg, #14b8a6 0%, #0ea5e9 100%);
+
+  /* Text */
+  --t-white: #ffffff;
+  --t-300: #d1d5db;
+  --t-400: #9ca3af;
+  --t-500: #6b7280;
+
+  /* Effects */
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-hover: rgba(14, 165, 233, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(14, 165, 233, 0.25);
+  --shadow-glow: 0 8px 32px rgba(14, 165, 233, 0.15);
+  --shadow-glow-strong: 0 0 30px rgba(14, 165, 233, 0.4);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-900);
+  color: var(--t-white);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Mesh gradient background — soft radial color blobs */
+.bg-mesh {
+  background-color: var(--bg-900);
+  background-image:
+    radial-gradient(at 40% 20%, rgba(14, 165, 233, 0.18) 0px, transparent 50%),
+    radial-gradient(at 80% 0%,   rgba(20, 184, 166, 0.12) 0px, transparent 50%),
+    radial-gradient(at 0% 50%,   rgba(14, 165, 233, 0.10) 0px, transparent 50%),
+    radial-gradient(at 80% 50%,  rgba(20, 184, 166, 0.06) 0px, transparent 50%),
+    radial-gradient(at 0% 100%,  rgba(14, 165, 233, 0.10) 0px, transparent 50%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-800); }
+::-webkit-scrollbar-thumb {
+  background: var(--brand-1);
+  border-radius: 999px;
+}
+
+/* ---------- Typography helpers ---------- */
+.text-gradient {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.section-heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  color: var(--t-white);
+}
+
+.section-heading span {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.muted {
+  color: var(--t-400);
+}
+
+/* ---------- Glass cards ---------- */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+}
+
+.glass-card-hover {
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.glass-card-hover:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-4px);
+}
+
+/* ---------- Gradient buttons ---------- */
+.gradient-btn,
+.btn-gradient {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--t-white) !important;
+  background: var(--grad-brand);
+  border: none;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.gradient-btn::before,
+.btn-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grad-brand-r);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+
+.gradient-btn:hover,
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-strong);
+  color: var(--t-white) !important;
+}
+
+.gradient-btn:hover::before,
+.btn-gradient:hover::before {
+  opacity: 1;
+}
+
+/* Outline variant */
+.outline-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--t-white);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.outline-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(var(--brand-1-rgb), 0.4);
+  color: var(--t-white);
+  transform: translateY(-1px);
+}
+
+/* ---------- Inputs ---------- */
+.input-field {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: var(--t-white);
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.input-field::placeholder {
+  color: var(--t-500);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--brand-1);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(var(--brand-1-rgb), 0.15);
+}
+
+/* ---------- Layout helpers ---------- */
+.container-x {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-padding {
+  padding: 80px 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding { padding: 60px 0; }
+}

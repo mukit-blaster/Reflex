@@ -1,407 +1,265 @@
-// // Default Section - Show Home on Load
-// document.addEventListener('DOMContentLoaded', () => {
-//     showSection('home-section');
-// });
-
-// // Navigation Logic
-// document.getElementById('nav-home').addEventListener('click', () => {
-//     showSection('home-section');
-// });
-
-// // document.getElementById('nav-appointments').addEventListener('click', () => {
-// //     showSection('appointments-section');
-// // });
-
-// // document.getElementById('nav-users').addEventListener('click', () => {
-// //     showSection('users-section');
-// // });
-// document.getElementById('nav-appointments').addEventListener('click', () => {
-//   showSection('appointments-section');
-//   loadAppointments(); // 👈 Fetch fresh data each time you open the tab
-// });
-
-// document.getElementById('nav-users').addEventListener('click', () => {
-//   showSection('users-section');
-//   loadUsers(); // 👈 Fetch user list when you open the tab
-// });
-
-// document.getElementById('nav-settings').addEventListener('click', () => {
-//     showSection('settings-section');
-// });
-
-// // Function to Show Sections
-// function showSection(sectionId) {
-//     const sections = document.querySelectorAll('.content-section');
-//     sections.forEach(section => section.classList.remove('active'));
-//     document.getElementById(sectionId).classList.add('active');
-// }
-
-// // // Approve/Reject Logic
-// // document.querySelectorAll('.approve').forEach(button => {
-// //     button.addEventListener('click', (e) => {
-// //         const id = e.target.dataset.id;
-// //         updateStatus(id, '✔️ Approved', 'approved');
-// //     });
-// // });
-
-// // document.querySelectorAll('.reject').forEach(button => {
-// //     button.addEventListener('click', (e) => {
-// //         const id = e.target.dataset.id;
-// //         updateStatus(id, '❌ Rejected', 'rejected');
-// //     });
-// // });
-
-// // function updateStatus(id, statusText, statusClass) {
-// //     const row = document.querySelector(`td.status[data-id="${id}"]`);
-// //     if (row) {
-// //         row.textContent = statusText;
-// //         row.className = `status ${statusClass}`;
-// //     }
-// // }
-
-
-// // document.addEventListener('DOMContentLoaded', () => {
-// //     const API_URL = 'http://localhost:3000';
-  
-// //     function loadAppointments() {
-// //       fetch(`${API_URL}/appointments`)
-// //         .then(res => res.json())
-// //         .then(data => {
-// //           const tbody = document.getElementById('appointments-body');
-// //           tbody.innerHTML = '';
-  
-// //           data.forEach((appointment, index) => {
-// //             const row = document.createElement('tr');
-// //             row.innerHTML = `
-// //               <td>${index + 1}</td>
-// //               <td>${appointment.name}</td>
-// //               <td>${appointment.email}</td>
-// //               <td>${appointment.phone}</td>
-// //               <td>${appointment.date}</td>
-// //               <td>${appointment.time}</td>
-// //               <td class="status">${appointment.status}</td>
-// //               <td>
-// //                 <button class="status-btn approve" data-id="${appointment._id}">Approve</button>
-// //                 <button class="status-btn reject" data-id="${appointment._id}">Reject</button>
-// //                 <button class="status-btn edit" data-id="${appointment._id}">Edit</button>
-// //               </td>
-// //             `;
-// //             tbody.appendChild(row);
-// //           });
-  
-// //           // Add button functionality
-// //           document.querySelectorAll('.approve').forEach(button => {
-// //             button.addEventListener('click', () => updateStatus(button.dataset.id, 'Approved'));
-// //           });
-  
-// //           document.querySelectorAll('.reject').forEach(button => {
-// //             button.addEventListener('click', () => updateStatus(button.dataset.id, 'Rejected'));
-// //           });
-// //         });
-// //     }
-  
-// //     function updateStatus(id, status) {
-// //       fetch(`${API_URL}/appointments/${id}/status`, {
-// //         method: 'PUT',
-// //         headers: { 'Content-Type': 'application/json' },
-// //         body: JSON.stringify({ status })
-// //       })
-// //         .then(res => res.json())
-// //         .then(() => loadAppointments())
-// //         .catch(err => console.error('Failed to update status:', err));
-// //     }
-  
-// //     loadAppointments();
-// //   });
-
-
-
-
-
-
-
-
-
-// function loadAppointments() {
-//   fetch('http://localhost:3000/appointments')
-
-//       .then(res => res.json())
-//       .then(data => {
-//         const tbody = document.querySelector('#appointments-section tbody');
-//         tbody.innerHTML = '';
-//         data.forEach((appointment, index) => {
-//           const row = document.createElement('tr');
-//           row.innerHTML = `
-//             <td>${index + 1}</td>
-//             <td>${appointment.name}</td>
-//             <td>${appointment.email}</td>
-//             <td>${appointment.phone}</td>
-//             <td>${appointment.date}</td>
-//             <td>${appointment.time}</td>
-//             <td class="status">${appointment.status || 'Pending'}</td>
-//             <td>
-//               <button class="status-btn approve" data-id="${appointment._id}">Approve</button>
-//               <button class="status-btn reject" data-id="${appointment._id}">Reject</button>
-//               <button class="status-btn edit" data-id="${appointment._id}">Edit</button>
-//             </td>
-//           `;
-//           tbody.appendChild(row);
-//         });
-  
-//         attachEditListeners(); // 👈 Make sure this is called after rendering
-//         attachStatusListeners(); // 👈 Add this line!
-//       });
-//   }
-  
-//   function attachEditListeners() {
-//     document.querySelectorAll('.edit').forEach(button => {
-//       button.addEventListener('click', () => {
-//         const id = button.dataset.id;
-//         const row = button.closest('tr');
-  
-//         const name = prompt('Edit Name:', row.children[1].textContent);
-//         const email = prompt('Edit Email:', row.children[2].textContent);
-//         const phone = prompt('Edit Phone:', row.children[3].textContent);
-//         const date = prompt('Edit Date (YYYY-MM-DD):', row.children[4].textContent);
-//         const time = prompt('Edit Time:', row.children[5].textContent);
-  
-//         if (name && email && phone && date && time) {
-//           fetch(`/appointments/${id}`, {
-//             method: 'PUT',
-//             headers: { 'Content-Type': 'application/json' },
-//             body: JSON.stringify({ name, email, phone, date, time })
-//           })
-//           .then(res => res.json())
-//           .then(() => loadAppointments())
-//           .catch(err => console.error('Failed to update:', err));
-//         }
-//       });
-//     });
-//   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   function attachStatusListeners() {
-//     document.querySelectorAll('.approve').forEach(button => {
-//       button.addEventListener('click', () => {
-//         const id = button.dataset.id;
-//         updateStatus(id, 'Approved');
-//       });
-//     });
-  
-//     document.querySelectorAll('.reject').forEach(button => {
-//       button.addEventListener('click', () => {
-//         const id = button.dataset.id;
-//         updateStatus(id, 'Rejected');
-//       });
-//     });
-//   }
-  
-//   function updateStatus(id, status) {
-//     fetch(`/appointments/${id}/status`, {
-//       method: 'PUT',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({ status })
-//     })
-//     .then(res => res.json())
-//     .then(() => loadAppointments())
-//     .catch(err => console.error('Status update error:', err));
-//   }
-
-    
-  
-//   loadAppointments(); // 👈 Call this once on page load
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   async function loadUsers() {
-//     try {
-//       const response = await fetch('http://localhost:3000/users');
-//       const users = await response.json();
-
-//       const tableBody = document.getElementById('users-table-body');
-//       tableBody.innerHTML = ''; // Clear table first
-
-//       users.forEach((user, index) => {
-//         const tr = document.createElement('tr');
-
-//         tr.innerHTML = `
-//           <td>${index + 1}</td>
-//           <td>${user.name}</td>
-//           <td>${user.email}</td>
-//           <td>${new Date(user.createdAt).toISOString().split('T')[0]}</td>
-//         `;
-
-//         tableBody.appendChild(tr);
-//       });
-//     } catch (error) {
-//       console.error('Error loading users:', error);
-//     }
-//   }
-
-//   // Load users when page is ready
-//   window.addEventListener('DOMContentLoaded', loadUsers);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  showSection('home-section');
-  loadAppointments(); // Optional: preload
-  loadUsers(); // Optional: preload
+// Reflex admin dashboard — single source of truth for the admin UI.
+
+const token = localStorage.getItem('token');
+const role = localStorage.getItem('role');
+const username = localStorage.getItem('username');
+
+if (!token || role !== 'admin') {
+  alert('Admin access required. Please log in as admin.');
+  window.location.href = 'login.html';
+}
+
+const adminNameEl = document.getElementById('admin-name');
+if (adminNameEl) adminNameEl.textContent = username || 'Admin';
+const settingsName = document.getElementById('settings-admin-name');
+if (settingsName) settingsName.textContent = username || 'admin';
+
+async function api(path, options = {}) {
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+    ...(options.headers || {}),
+  };
+  const res = await fetch(path, { ...options, headers });
+  if (res.status === 401 || res.status === 403) {
+    alert('Session expired or unauthorized. Please log in again.');
+    localStorage.clear();
+    window.location.href = 'login.html';
+    throw new Error('unauthorized');
+  }
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.message || `Request failed (${res.status})`);
+  return data;
+}
+
+// ---------- Navigation ----------
+function showSection(id, navId) {
+  document.querySelectorAll('.content-section').forEach((s) => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+
+  document.querySelectorAll('.sidebar-nav .nav-link').forEach((l) => l.classList.remove('active'));
+  if (navId) {
+    const link = document.getElementById(navId);
+    if (link) link.classList.add('active');
+  }
+}
+
+document.getElementById('nav-home').addEventListener('click', (e) => {
+  e.preventDefault();
+  showSection('home-section', 'nav-home');
+  loadStats();
 });
-
-document.getElementById('nav-home').addEventListener('click', () => {
-  showSection('home-section');
-});
-
-document.getElementById('nav-appointments').addEventListener('click', () => {
-  showSection('appointments-section');
+document.getElementById('nav-appointments').addEventListener('click', (e) => {
+  e.preventDefault();
+  showSection('appointments-section', 'nav-appointments');
   loadAppointments();
 });
-
-document.getElementById('nav-users').addEventListener('click', () => {
-  showSection('users-section');
+document.getElementById('nav-users').addEventListener('click', (e) => {
+  e.preventDefault();
+  showSection('users-section', 'nav-users');
   loadUsers();
 });
-
-document.getElementById('nav-settings').addEventListener('click', () => {
-  showSection('settings-section');
+document.getElementById('nav-settings').addEventListener('click', (e) => {
+  e.preventDefault();
+  showSection('settings-section', 'nav-settings');
+  loadHealth();
+});
+document.getElementById('nav-logout').addEventListener('click', (e) => {
+  e.preventDefault();
+  localStorage.clear();
+  window.location.href = 'login.html';
 });
 
-function showSection(sectionId) {
-  const sections = document.querySelectorAll('.content-section');
-  sections.forEach(section => section.classList.remove('active'));
-  document.getElementById(sectionId).classList.add('active');
+// ---------- Stats ----------
+async function loadStats() {
+  try {
+    const stats = await api('/api/dashboard-stats');
+    document.getElementById('stat-total-appts').textContent = stats.totalAppointments;
+    document.getElementById('stat-total-users').textContent = stats.totalUsers;
+    document.getElementById('stat-pending-appts').textContent = stats.pendingAppointments;
+    document.getElementById('stat-approved-appts').textContent = stats.approvedAppointments;
+  } catch (err) {
+    console.error('Failed to load stats:', err);
+  }
 }
 
-function loadAppointments() {
-  fetch('http://localhost:8080/appointments')
-      .then(res => res.json())
-      .then(data => {
-          const tbody = document.getElementById('appointments-body');
-          tbody.innerHTML = '';
-          data.forEach((appointment, index) => {
-              const row = document.createElement('tr');
-              row.innerHTML = `
-                  <td>${index + 1}</td>
-                  <td>${appointment.name}</td>
-                  <td>${appointment.email}</td>
-                  <td>${appointment.phone}</td>
-                  <td>${appointment.date}</td>
-                  <td>${appointment.time}</td>
-                  <td class="status">${appointment.status || 'Pending'}</td>
-                  <td>
-                      <button class="status-btn approve" data-id="${appointment._id}">Approve</button>
-                      <button class="status-btn reject" data-id="${appointment._id}">Reject</button>
-                      <button class="status-btn edit" data-id="${appointment._id}">Edit</button>
-                  </td>
-              `;
-              tbody.appendChild(row);
-          });
-
-          attachEditListeners();
-          attachStatusListeners();
-      });
+async function loadHealth() {
+  try {
+    const data = await fetch('/api/health').then((r) => r.json());
+    document.getElementById('settings-server-time').textContent = data.time;
+  } catch {
+    document.getElementById('settings-server-time').textContent = 'unreachable';
+  }
 }
 
-function attachEditListeners() {
-  document.querySelectorAll('.edit').forEach(button => {
-      button.addEventListener('click', () => {
-          const id = button.dataset.id;
-          const row = button.closest('tr');
-          const name = prompt('Edit Name:', row.children[1].textContent);
-          const email = prompt('Edit Email:', row.children[2].textContent);
-          const phone = prompt('Edit Phone:', row.children[3].textContent);
-          const date = prompt('Edit Date (YYYY-MM-DD):', row.children[4].textContent);
-          const time = prompt('Edit Time:', row.children[5].textContent);
+// ---------- Appointments ----------
+const apptSearch = document.getElementById('appt-search');
+const apptStatus = document.getElementById('appt-status-filter');
+const apptRefresh = document.getElementById('appt-refresh');
 
-          if (name && email && phone && date && time) {
-              fetch(`http://localhost:8080/appointments/${id}`, {
-                  method: 'PUT',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ name, email, phone, date, time })
-              })
-              .then(res => res.json())
-              .then(() => loadAppointments());
-          }
-      });
-  });
+let apptSearchTimer;
+apptSearch.addEventListener('input', () => {
+  clearTimeout(apptSearchTimer);
+  apptSearchTimer = setTimeout(loadAppointments, 250);
+});
+apptStatus.addEventListener('change', loadAppointments);
+apptRefresh.addEventListener('click', loadAppointments);
+
+async function loadAppointments() {
+  const params = new URLSearchParams();
+  if (apptSearch.value) params.set('q', apptSearch.value);
+  if (apptStatus.value) params.set('status', apptStatus.value);
+
+  const tbody = document.getElementById('appointments-body');
+  tbody.innerHTML = '<tr><td colspan="8">Loading…</td></tr>';
+
+  try {
+    const data = await api(`/api/appointments?${params.toString()}`);
+    if (!data.length) {
+      tbody.innerHTML = '<tr><td colspan="8">No appointments found.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = '';
+    data.forEach((appt, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${i + 1}</td>
+        <td>${escapeHtml(appt.name)}</td>
+        <td>${escapeHtml(appt.email)}</td>
+        <td>${escapeHtml(appt.phone)}</td>
+        <td>${escapeHtml(appt.date)}</td>
+        <td>${escapeHtml(appt.time)}</td>
+        <td class="status status-${(appt.status || 'Pending').toLowerCase()}">${escapeHtml(appt.status || 'Pending')}</td>
+        <td>
+          <button class="status-btn approve" data-id="${appt._id}">Approve</button>
+          <button class="status-btn reject" data-id="${appt._id}">Reject</button>
+          <button class="status-btn edit" data-id="${appt._id}">Edit</button>
+          <button class="status-btn delete" data-id="${appt._id}">Delete</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+    attachAppointmentHandlers();
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="8">Error: ${escapeHtml(err.message)}</td></tr>`;
+  }
 }
 
-function attachStatusListeners() {
-  document.querySelectorAll('.approve').forEach(button => {
-      button.addEventListener('click', () => {
-          updateStatus(button.dataset.id, 'Approved');
-      });
-  });
-
-  document.querySelectorAll('.reject').forEach(button => {
-      button.addEventListener('click', () => {
-          updateStatus(button.dataset.id, 'Rejected');
-      });
-  });
+function attachAppointmentHandlers() {
+  document.querySelectorAll('.status-btn.approve').forEach((b) =>
+    b.addEventListener('click', () => updateApptStatus(b.dataset.id, 'Approved'))
+  );
+  document.querySelectorAll('.status-btn.reject').forEach((b) =>
+    b.addEventListener('click', () => updateApptStatus(b.dataset.id, 'Rejected'))
+  );
+  document.querySelectorAll('.status-btn.delete').forEach((b) =>
+    b.addEventListener('click', () => deleteAppt(b.dataset.id))
+  );
+  document.querySelectorAll('.status-btn.edit').forEach((b) =>
+    b.addEventListener('click', () => editAppt(b.dataset.id, b.closest('tr')))
+  );
 }
 
-function updateStatus(id, status) {
-  fetch(`http://localhost:8080/appointments/${id}/status`, {
+async function updateApptStatus(id, status) {
+  try {
+    await api(`/api/appointments/${id}/status`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status })
-  })
-  .then(res => res.json())
-  .then(() => loadAppointments());
+      body: JSON.stringify({ status }),
+    });
+    loadAppointments();
+    loadStats();
+  } catch (err) {
+    alert(err.message);
+  }
 }
 
+async function deleteAppt(id) {
+  if (!confirm('Delete this appointment?')) return;
+  try {
+    await api(`/api/appointments/${id}`, { method: 'DELETE' });
+    loadAppointments();
+    loadStats();
+  } catch (err) {
+    alert(err.message);
+  }
+}
 
+async function editAppt(id, row) {
+  const name = prompt('Name:', row.children[1].textContent);
+  if (name === null) return;
+  const email = prompt('Email:', row.children[2].textContent);
+  if (email === null) return;
+  const phone = prompt('Phone:', row.children[3].textContent);
+  if (phone === null) return;
+  const date = prompt('Date (YYYY-MM-DD):', row.children[4].textContent);
+  if (date === null) return;
+  const time = prompt('Time:', row.children[5].textContent);
+  if (time === null) return;
+
+  try {
+    await api(`/api/appointments/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ name, email, phone, date, time }),
+    });
+    loadAppointments();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+// ---------- Users ----------
+async function loadUsers() {
+  const tbody = document.getElementById('users-table-body');
+  tbody.innerHTML = '<tr><td colspan="6">Loading…</td></tr>';
+  try {
+    const users = await api('/api/users');
+    if (!users.length) {
+      tbody.innerHTML = '<tr><td colspan="6">No users yet.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = '';
+    users.forEach((u, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${i + 1}</td>
+        <td>${escapeHtml(u.name || '')}</td>
+        <td>${escapeHtml(u.email || '')}</td>
+        <td>${escapeHtml(u.role || 'user')}</td>
+        <td>${u.createdAt ? new Date(u.createdAt).toLocaleString() : ''}</td>
+        <td><button class="status-btn delete" data-id="${u._id}">Delete</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+    document.querySelectorAll('#users-table-body .delete').forEach((b) =>
+      b.addEventListener('click', async () => {
+        if (!confirm('Delete this user?')) return;
+        try {
+          await api(`/api/users/${b.dataset.id}`, { method: 'DELETE' });
+          loadUsers();
+          loadStats();
+        } catch (err) {
+          alert(err.message);
+        }
+      })
+    );
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="6">Error: ${escapeHtml(err.message)}</td></tr>`;
+  }
+}
+
+// ---------- Utils ----------
+function escapeHtml(str) {
+  return String(str ?? '').replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  }[c]));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  showSection('home-section', 'nav-home');
+  loadStats();
+});

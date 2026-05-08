@@ -1,7 +1,14 @@
 {
+  "name": "reflex",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-  "start": "node server.js"
-},
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",

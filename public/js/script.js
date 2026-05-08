@@ -1,94 +1,80 @@
-// Redirect to the login page
-document.getElementById("login-btn").addEventListener("click", function () {
-  window.location.href = "login.html";
-});
+// ---------- Header auth state ----------
+document.addEventListener("DOMContentLoaded", function () {
+  const loginBtn = document.getElementById("login-btn");
+  const signupBtn = document.getElementById("signup-btn");
+  const dashboardBtn = document.getElementById("dashboard-btn");
+  const logoutBtn = document.getElementById("logout-btn");
 
-// Redirect to the signnup page
-document.getElementById("signup-btn").addEventListener("click", function () {
-  window.location.href = "signup.html";
-});
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const username = localStorage.getItem("username");
+  const role = localStorage.getItem("role");
 
-// Redirect to the audio therapy page
-// document.getElementById("audio-therapy").addEventListener("click", function () {
-//   window.location.href = "./music player/music.html";
-// });
-
-// Redirect to the appointment page
-// document.getElementById("exploreBtn").addEventListener("click", function () {
-//   window.location.href = "./appointment booking/booking.html";
-// });
-
-// Redirect to the yoga page
-// document.getElementById("yoga-therapy").addEventListener("click", function () {
-//   window.location.href = "./yoga therapy/yoga.html";
-// });
-
-// Redirect to the reading therapy page
-// document
-//   .getElementById("reading-therapy")
-//   .addEventListener("click", function () {
-//     window.location.href = "./reading therapy/reading.html";
-//   });
-
-// Redirect to the laughing therapy page
-// document
-//   .getElementById("reading-therapy")
-//   .addEventListener("click", function () {
-//     window.location.href = "/laughing therapy/laughing.html";
-//   });
-  
-
-//Get the button
-let mybutton = document.getElementById("btn-back-to-top");
-
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function () {
-  scrollFunction();
-};
-
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
+  if (isLoggedIn && username) {
+    if (loginBtn) {
+      loginBtn.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i><span>${username}</span>`;
+      loginBtn.removeAttribute("href");
+      loginBtn.classList.add("logged-in");
+    }
+    if (signupBtn) signupBtn.style.display = "none";
+    if (logoutBtn) logoutBtn.style.display = "inline-flex";
+    if (role === "admin" && dashboardBtn) dashboardBtn.style.display = "inline-flex";
   }
-}
-// When the user clicks on the button, scroll to the top of the document
-mybutton.addEventListener("click", backToTop);
 
-function backToTop() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function () {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("username");
+      localStorage.removeItem("role");
+      localStorage.removeItem("token");
+      window.location.href = "index.html";
+    });
+  }
+});
+
+// ---------- Back-to-top button ----------
+const mybutton = document.getElementById("btn-back-to-top");
+
+if (mybutton) {
+  window.addEventListener("scroll", function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  });
+
+  mybutton.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
 
+// ---------- Animated hero text ----------
 const sentences = [
   "Welcome to Reflex!",
   "Enhance your well-being with us.",
   "Explore mindfulness, music, and counseling.",
 ];
 
-let index = 0;
+let sentenceIndex = 0;
 const typingSpeed = 100;
 const pauseDuration = 2000;
 
 function typeSentence() {
   const textElement = document.getElementById("animated-text");
+  if (!textElement) return;
   textElement.textContent = "";
 
-  const currentSentence = sentences[index];
+  const currentSentence = sentences[sentenceIndex];
   let charIndex = 0;
 
-  // Typing effect
   const typingInterval = setInterval(() => {
     if (charIndex < currentSentence.length) {
       textElement.textContent += currentSentence.charAt(charIndex);
       charIndex++;
     } else {
       clearInterval(typingInterval);
-
-      // Pause before starting the next sentence
       setTimeout(() => {
-        index = (index + 1) % sentences.length;
+        sentenceIndex = (sentenceIndex + 1) % sentences.length;
         typeSentence();
       }, pauseDuration);
     }
@@ -97,174 +83,62 @@ function typeSentence() {
 
 typeSentence();
 
-
-
-// //for laughing therapy page
-// // Simulating a login status variable
-// let isLoggedIn = false;
-
-// document.getElementById("exploreLaughing").addEventListener("click", function (e) {
-//   e.preventDefault(); // Prevent default link behavior
-  
-//   if (isLoggedIn) {
-//     // Redirect to the service subpage if logged in
-//     window.location.href = "/laughing therapy/laughing.html";
-//   } else {
-//     // Show the custom alert
-//     document.getElementById("customAlert").style.display = "flex";
-//   }
-// });
-
-// document.getElementById("closeAlert").addEventListener("click", function () {
-//   // Hide the custom alert
-//   document.getElementById("customAlert").style.display = "none";
-// });
-
-
-
-
-
-
-
-// Simulating login status (use localStorage or other methods for real authentication)
-let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
-// Subpage mapping for buttons
+// ---------- Service-card click routing ----------
+// Maps a button id to the page it should open. Pages that don't exist yet
+// are left out — those cards just show a "coming soon" alert.
 const subpages = {
-  "exploreLaughing": "/laughing therapy/laughing.html",
-  "exploreBtn": "booking.html",
-  "audio-therapy": "./music player/music.html",
+  exploreBtn: "booking.html",      // Psychiatrists Consult
   "yoga-therapy": "yoga.html",
-  "reading-therapy": "reading.html"
-  // Add more buttons and subpages here
+  "reading-therapy": "reading.html",
 };
 
-// Function to handle card clicks
-function handleCardClick(buttonId) {
-  document.getElementById(buttonId).addEventListener("click", function (e) {
-    e.preventDefault(); // Prevent default link behavior
+const comingSoonButtons = ["audio-therapy", "exploreLaughing"];
 
-    if (isLoggedIn) {
-      // Redirect to the respective subpage if logged in
-      window.location.href = subpages[buttonId];
-    } else {
-      // Show the custom alert if not logged in
-      document.getElementById("customAlert").style.display = "flex";
-    }
-  });
+function isUserLoggedIn() {
+  return localStorage.getItem("isLoggedIn") === "true";
 }
 
-// Iterate over all buttons and attach click events
-Object.keys(subpages).forEach(handleCardClick);
+function showLoginRequired() {
+  const alertEl = document.getElementById("customAlert");
+  if (alertEl) alertEl.style.display = "flex";
+}
 
-// Close the custom alert modal when the OK button is clicked
-document.getElementById("closeAlert").addEventListener("click", function () {
-  // Hide the custom alert by setting display to "none"
-  document.getElementById("customAlert").style.display = "none";
+Object.entries(subpages).forEach(([id, url]) => {
+  const btn = document.getElementById(id);
+  if (!btn) return;
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (isUserLoggedIn()) {
+      window.location.href = url;
+    } else {
+      showLoginRequired();
+    }
+  });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const loginBtn = document.getElementById("login-btn");
-//   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-//   const username = localStorage.getItem("username");
-
-//   if (isLoggedIn && username) {
-//     // Replace "Login" button with the username
-//     loginBtn.innerHTML = `
-//       <i class="fa fa-user" aria-hidden="true"></i>
-//       <span>${username}</span>
-//     `;
-//   }
-// });
-
-
-
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const loginBtn = document.getElementById("login-btn");
-//   const logoutBtn = document.getElementById("logout-btn");
-//   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-//   const username = localStorage.getItem("username");
-
-//   if (isLoggedIn && username) {
-//     // Replace "Login" button with the username
-//     loginBtn.innerHTML = `
-//       <i class="fa fa-user" aria-hidden="true"></i>
-//       <span>${username}</span>
-//     `;
-
-//     // Show logout button
-//     logoutBtn.style.display = "inline";
-//   }
-
-//   // Handle logout
-//   logoutBtn.addEventListener("click", function () {
-//     localStorage.removeItem("isLoggedIn");
-//     localStorage.removeItem("username");
-//     window.location.reload(); // Refresh the page
-//   });
-// });
-
-// // Simulate login
-// document.getElementById("login-btn").addEventListener("click", function () {
-//   isLoggedIn = true;
-//   localStorage.setItem("isLoggedIn", "true");
-// });
-
-// // Check login status on page load
-// document.addEventListener("DOMContentLoaded", function () {
-//   isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-// });
-
-
-
-
-
-
-
-
-
-
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const loginBtn = document.getElementById("login-btn");
-    const logoutBtn = document.getElementById("logout-btn");
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    const username = localStorage.getItem("username");
-
-    if (isLoggedIn && username) {
-      loginBtn.innerHTML = `
-        <i class="fa fa-user" aria-hidden="true"></i>
-        <span>${username}</span>
-      `;
-      logoutBtn.style.display = "inline";
-    }
-
-    logoutBtn.addEventListener("click", function () {
-      localStorage.removeItem("isLoggedIn");
-      localStorage.removeItem("username");
-      localStorage.removeItem("token");
-      window.location.reload();  // Refresh the page
-    });
+comingSoonButtons.forEach((id) => {
+  const btn = document.getElementById(id);
+  if (!btn) return;
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    alert("This service is coming soon!");
   });
+});
 
+// Close the login-required modal
+document.addEventListener("DOMContentLoaded", function () {
+  const closeAlert = document.getElementById("closeAlert");
+  const alertEl = document.getElementById("customAlert");
+  if (closeAlert && alertEl) {
+    closeAlert.addEventListener("click", function () {
+      alertEl.style.display = "none";
+    });
+    alertEl.addEventListener("click", function (e) {
+      if (e.target === alertEl) alertEl.style.display = "none";
+    });
+  }
 
+  // Footer year
+  const yearEl = document.getElementById("displayYear");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+});
